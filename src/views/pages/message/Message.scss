@@ -1,0 +1,23 @@
+.message-content {
+  background: #27293d;
+  border: 0;
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+.message-content {
+  color: #fff;
+}
+.message-button-content {
+  display: flex;
+  align-items: center;
+}
+.search-content-button {
+  display: flex;
+  align-items: center;
+}
+.search-content-button span:last-of-type {
+  margin-left: 10px;
+}

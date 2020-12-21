@@ -1,0 +1,10 @@
+.login-content {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.login-error-message {
+    color: red;
+    text-align: center;
+    font-size: 14px;
+}
