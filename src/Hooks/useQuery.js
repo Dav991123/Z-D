@@ -7,7 +7,7 @@ const useQuery = () => {
     }
     if(!window.location.search) {
         data = {
-            page: '1',
+            page: '0',
             size: '5'
         };
 
