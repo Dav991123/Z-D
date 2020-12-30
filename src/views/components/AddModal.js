@@ -11,9 +11,13 @@ const cardUserDataModel = {
     surname: ''
 }
 
+//  asc desc
+// type = sort
+
 const AddModal = ({onRefreshPage, ...restProps}) => {
     const { get } = useFetch("code");
-    const [codeData, setCodeData] = useState([])
+    const [codeData, setCodeData] = useState([]);
+    const [ codeType, setCodeType ] = useState('DESC')
     const [selectedCode, setSelectedCode] = useState('')
     const { post } = useFetch(`card/${selectedCode.value}`);
 
@@ -32,10 +36,12 @@ const AddModal = ({onRefreshPage, ...restProps}) => {
     }
 
     useEffect(() => {
-        get('?attached=false').then((data) => {
+        get(`?attached=false&page=0&size=10&sort=type,${codeType}`).then((data) => {
             setCodeData(data.content)
         })
-    }, []);
+    }, [codeType]);
+
+    console.log(codeType)
 
     return (
         <Modal
@@ -53,8 +59,11 @@ const AddModal = ({onRefreshPage, ...restProps}) => {
             </Modal.Header>
 
             <Modal.Body>
+               
                 <EditForm
                     values={values}
+                    codeType={codeType}
+                    setCodeType={setCodeType}
                     codeData={codeData}
                     handleSave={addCard}
                     handleChange={setValues}

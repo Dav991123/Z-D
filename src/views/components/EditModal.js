@@ -14,6 +14,7 @@ const cardUserDataModel = {
 
 const EditModal = ({selectedRow, onRefreshPage, ...restProps}) => {
   const { get } = useFetch("code");
+  const [ codeType, setCodeType ] = useState('DESC')
 
   const [codeData, setCodeData] = useState([])
   const [selectedCode, setSelectedCode] = useState('')
@@ -26,10 +27,10 @@ const EditModal = ({selectedRow, onRefreshPage, ...restProps}) => {
 
   useEffect(() => {
 
-    get('?attached=true').then((data) => {
+    get(`?attached=false&page=0&size=10&sort=type,${codeType}`).then((data) => {
       setCodeData(data.content)
     })
-  }, []);
+  }, [codeType]);
 
   useEffect(() => {
     const { pink, ...selectedData } = selectedRow;
@@ -66,6 +67,8 @@ const EditModal = ({selectedRow, onRefreshPage, ...restProps}) => {
           Object.values(values).length && (
               <EditForm
                   values={values}
+                  codeType={codeType}
+                  setCodeType={setCodeType}
                   codeData={codeData}
                   handleSave={editCard}
                   handleChange={setValues}

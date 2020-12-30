@@ -12,11 +12,12 @@ import {
   FormGroup,
   Input,
   Row,
+  Label
 } from "reactstrap";
 import Select  from 'react-select'
 
 
-const EditForm = ({values, codeData, handleChange, handleSave, selectedCode, setSelectedCode}) => {
+const EditForm = ({values, codeType, setCodeType, codeData, handleChange, handleSave, selectedCode, setSelectedCode}) => {
   const { firstAttachedPerson, owner, secondAttachedPerson } = values;
 
   const transformData = (data) => {
@@ -40,7 +41,40 @@ const EditForm = ({values, codeData, handleChange, handleSave, selectedCode, set
                 <CardTitle tag="h4">User Info</CardTitle>
               </CardHeader>
               <CardBody>
-                <Form action="#">
+                <Form onChange={e => {
+                  setCodeType(e.target.value)
+                }}>
+              <FormGroup check inline className="form-check-radio">
+                        <Label check>
+                          <Input
+                              defaultValue="DESC"
+                              id="exampleRadios3"
+                              name="DESC"
+                              type="radio"
+                              checked={codeType === 'DESC'}
+                          />
+                          <span className="form-check-sign" />
+                          GOLD
+                        </Label>
+                  </FormGroup>
+
+                  <FormGroup check inline className="form-check-radio">
+                        <Label check>
+                          <Input
+                              defaultValue="asc"
+                              id="exampleRadios3"
+                              name="asc"
+                              type="radio"
+                              checked={codeType === 'asc'}
+                          />
+                          <span className="form-check-sign" />
+                          BLACK
+                        </Label>
+                  </FormGroup>
+                </Form>
+                  
+                <Form >
+
                   <Row>
                     <Col>
                       <Select
