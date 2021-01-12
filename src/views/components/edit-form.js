@@ -44,7 +44,7 @@ const EditForm = ({values, codeType, setCodeType, codeData, handleChange, handle
                 <Form onChange={e => {
                   setCodeType(e.target.value)
                 }}>
-              <FormGroup check inline className="form-check-radio">
+             <FormGroup check inline className="form-check-radio">
                         <Label check>
                           <Input
                               defaultValue="DESC"
@@ -58,7 +58,7 @@ const EditForm = ({values, codeType, setCodeType, codeData, handleChange, handle
                         </Label>
                   </FormGroup>
 
-                  <FormGroup check inline className="form-check-radio">
+                   <FormGroup check inline className="form-check-radio">
                         <Label check>
                           <Input
                               defaultValue="asc"
@@ -70,11 +70,11 @@ const EditForm = ({values, codeType, setCodeType, codeData, handleChange, handle
                           <span className="form-check-sign" />
                           BLACK
                         </Label>
-                  </FormGroup>
+                  </FormGroup> 
                 </Form>
                   
                 <Form >
-
+{/* 
                   <Row>
                     <Col>
                       <Select
@@ -88,7 +88,7 @@ const EditForm = ({values, codeType, setCodeType, codeData, handleChange, handle
                           options={transformData(codeData)}
                       />
                     </Col>
-                  </Row>
+                  </Row> */}
                   <Row>
                     <Col>
                       <label>Name</label>

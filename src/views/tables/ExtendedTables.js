@@ -154,11 +154,7 @@ const ExtendedTables = (props) => {
             onHide={() => handleIsOpenModal('editModal')}
             onRefreshPage={handleGetCardData}
         />
-        <AddModal
-            show={modalShow.addModal}
-            onRefreshPage={handleGetCardData}
-            onHide={() => handleIsOpenModal('addModal')}
-        />
+    
         <Row>
           <ol className="breadcrumb bg-transparent ml-3">
             <BreadcrumbItem>
@@ -320,21 +316,6 @@ const ExtendedTables = (props) => {
                                   >
                                     Edit Card
                                   </UncontrolledTooltip>
-                                  {/*<Button*/}
-                                  {/*  className="btn-link btn-neutral"*/}
-                                  {/*  color="danger"*/}
-                                  {/*  id="tooltip467555755"*/}
-                                  {/*  size="sm"*/}
-                                  {/*  onClick={() => openRemoveConfirmModal()}*/}
-                                  {/*>*/}
-                                  {/*  <i className="tim-icons icon-simple-remove" />*/}
-                                  {/*</Button>*/}
-                                  {/*<UncontrolledTooltip*/}
-                                  {/*  delay={0}*/}
-                                  {/*  target="tooltip467555755"*/}
-                                  {/*>*/}
-                                  {/*  Tooltip on top*/}
-                                  {/*</UncontrolledTooltip>*/}
                                 </td>
                               </tr>
                             );
@@ -351,7 +332,7 @@ const ExtendedTables = (props) => {
                       <Button
                           color="info"
                           size="sm"
-                          disabled={page === 1}
+                          disabled={page === 0}
                           onClick={(e) => {
                             handleChangePagination('prev')
                             e.preventDefault()

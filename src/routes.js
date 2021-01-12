@@ -6,6 +6,7 @@ import Calendar from "views/Calendar.js";
 import CardDetail from 'views/pages/cardDetail/cardDetail.js';
 import Message from "views/pages/message/Message.js";
 import Dashboard from "views/Dashboard.js";
+import Card from 'views/pages/Card'
 import Buttons from "views/components/Buttons.js";
 import SweetAlert from "views/components/SweetAlert.js";
 import Notifications from "views/components/Notifications.js";
@@ -50,6 +51,15 @@ const routes = [
         component: Message,
         layout: "/admin",
       },
+      {
+        path: '/card',
+        name: 'Card',
+        component: Card,
+        rtlName: "هعذاتسجيل الدخول",
+        mini: "L",
+        rtlMini: "هعذا",
+        layout: "/admin"
+      }
       // {
       //   path: "/icons",
       //   name: "Icons",

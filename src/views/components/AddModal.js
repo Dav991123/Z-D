@@ -19,8 +19,9 @@ const AddModal = ({onRefreshPage, ...restProps}) => {
     const [codeData, setCodeData] = useState([]);
     const [ codeType, setCodeType ] = useState('DESC')
     const [selectedCode, setSelectedCode] = useState('')
-    const { post } = useFetch(`card/${selectedCode.value}`);
+    const { post } = useFetch(`card/${restProps.pin}`);
 
+    console.log(selectedCode, 'selectedCode');
     const [values, setValues] = useState({
         firstAttachedPerson: cardUserDataModel,
         owner: cardUserDataModel,
@@ -35,11 +36,11 @@ const AddModal = ({onRefreshPage, ...restProps}) => {
         })
     }
 
-    useEffect(() => {
-        get(`?attached=false&page=0&size=10&sort=type,${codeType}`).then((data) => {
-            setCodeData(data.content)
-        })
-    }, [codeType]);
+    // useEffect(() => {
+    //     get(`?attached=false&page=0&size=10&sort=type,${codeType}`).then((data) => {
+    //         setCodeData(data.content)
+    //     })
+    // }, [codeType]);
 
     console.log(codeType)
 
