@@ -1,0 +1,7 @@
+/*!
+ * perfect-scrollbar v1.4.0
+ * (c) 2018 Hyunje Jun
+ * @license MIT
+ */
+
+/*! nouislider - 14.1.1 - 12/15/2019 */

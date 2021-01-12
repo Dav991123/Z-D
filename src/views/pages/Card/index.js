@@ -9,6 +9,17 @@ import { useHistory } from 'react-router-dom';
 
 const Card = (props) => {
     const { get } = useFetch("code");
+    const { post } = useFetch('code/search?page=0&size=10');
+
+    useEffect(() => {
+        post({
+            name: 'pin',
+            value: '63046716',
+            operation: 'EQUALS'
+        })
+    }, [])
+
+
     const [ codeType, setCodeType ] = useState('DESC')
     const [pin, setPin] = useState('');
     const [attached, setAttached] = useState(false);
@@ -24,14 +35,14 @@ const Card = (props) => {
 
     const handleChangePageSize = useCallback((value) => {
         props.history.push(combineQuery({...parseQuery(window.location.search), size: value, page: queryObject.page }))
-      }, [history])
+      }, [props.history, queryObject.page])
     
       const handleChangePagination = useCallback(value => {
         let nextPage = page;
         nextPage = value === 'next' ? nextPage + 1 : nextPage -1;
         setPage(nextPage)
         props.history.push(combineQuery({...parseQuery(window.location.search), page: nextPage, size: queryObject.size}))
-      }, [query]);
+      }, [page, props.history, queryObject.size]);
 
     const [modalShow, setModalShow] = useState({
         editModal: false,

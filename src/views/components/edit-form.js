@@ -40,39 +40,7 @@ const EditForm = ({values, codeType, setCodeType, codeData, handleChange, handle
               <CardHeader>
                 <CardTitle tag="h4">User Info</CardTitle>
               </CardHeader>
-              <CardBody>
-                <Form onChange={e => {
-                  setCodeType(e.target.value)
-                }}>
-             <FormGroup check inline className="form-check-radio">
-                        <Label check>
-                          <Input
-                              defaultValue="DESC"
-                              id="exampleRadios3"
-                              name="DESC"
-                              type="radio"
-                              checked={codeType === 'DESC'}
-                          />
-                          <span className="form-check-sign" />
-                          GOLD
-                        </Label>
-                  </FormGroup>
-
-                   <FormGroup check inline className="form-check-radio">
-                        <Label check>
-                          <Input
-                              defaultValue="asc"
-                              id="exampleRadios3"
-                              name="asc"
-                              type="radio"
-                              checked={codeType === 'asc'}
-                          />
-                          <span className="form-check-sign" />
-                          BLACK
-                        </Label>
-                  </FormGroup> 
-                </Form>
-                  
+              <CardBody>              
                 <Form >
 {/* 
                   <Row>
