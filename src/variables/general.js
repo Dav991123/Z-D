@@ -1,5 +1,5 @@
-export const DOMAIN = "https://cors-anywhere.herokuapp.com/http://62.171.157.66:8040";
-// export const DOMAIN = 'http://62.171.157.66:8040';
+// export const DOMAIN = "https://cors-anywhere.herokuapp.com/http://62.171.157.66:8040";
+export const DOMAIN = 'http://62.171.157.66:8040';
 var today = new Date();
 var y = today.getFullYear();
 var m = today.getMonth();

@@ -1,0 +1,22 @@
+.card-table-row {
+    transition-duration: 0.5s;
+}
+
+.card-table-row:hover {
+    background-color: #1a1a21;
+}
+.filter-content section{
+    display: flex;
+
+    align-items: center;
+}
+
+.filter-content section div {
+    margin-left: 10px;
+}
+.filter-content h2{
+    /* margin: 0; */
+}
+.pin-content {
+    display: flex;
+}

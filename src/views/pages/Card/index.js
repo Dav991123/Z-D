@@ -6,32 +6,26 @@ import AddModal from "../../components/AddModal";
 import { withRouter } from 'react-router-dom';
 import {combineQuery, parseQuery} from "../../../core/queryHelper";
 import { useHistory } from 'react-router-dom';
-
+import './index.css'
 const Card = (props) => {
     const { get } = useFetch("code");
-    const { post } = useFetch('code/search?page=0&size=10');
-
-    useEffect(() => {
-        post({
-            name: 'pin',
-            value: '63046716',
-            operation: 'EQUALS'
-        })
-    }, [])
-
-
     const [ codeType, setCodeType ] = useState('DESC')
     const [pin, setPin] = useState('');
     const [attached, setAttached] = useState(false);
+    const [filter, setFilter] = useState([]);
+
+    const [filterPin, setFilterPin] = useState('');
+    const [filterCodeType, setFilterCodeType] = useState(null);;
+    
     const [codeData, setCodeData] = useState({
         content: [],
         total_pages: 0
     });
     const { queryObject, query } = useQuery();
 
+
     const [page, setPage] = useState(+queryObject.page);
     const history = useHistory();
-
 
     const handleChangePageSize = useCallback((value) => {
         props.history.push(combineQuery({...parseQuery(window.location.search), size: value, page: queryObject.page }))
@@ -49,13 +43,63 @@ const Card = (props) => {
         addModal: false
       });
 
+      const { post } = useFetch(`code/search?page=0&size=10&attached=${attached}&sort=type,${codeType}`);
+
     useEffect(() => {
         get(`${query}&attached=${attached}&sort=type,${codeType}`)
-        // get(`?attached=false&page=0&size=10&sort=type,${codeType}`)
         .then(data => {
             setCodeData(data)
         })
     }, [query, attached, codeType]);
+
+
+
+
+    const handleFilter = () => {
+        let model = [
+
+        ];
+
+        if(filterPin && filterCodeType) {
+            model = [
+                {
+                    "name":"pin",
+                    "value": filterPin,
+                    "operation":"EQUALS"
+                },
+                {
+                    "name":"type",
+                    "value": +filterCodeType,
+                    "operation":"EQUALS"
+                }
+            ]
+        }else if(filterPin) {
+            model = [
+                {
+                    "name":"pin",
+                    "value": +filterPin,
+                    "operation":"EQUALS"
+                },
+            ]
+        }else if(filterCodeType) {
+            model = [
+                {
+                    "name":"type",
+                    "value": +filterCodeType,
+                    "operation":"EQUALS"
+                }
+            ]
+        }
+
+          post(
+            {
+                "criteria": model
+            }
+        )
+        .then(data=> {
+            setCodeData(data);
+        })
+    }
 
 
   const handleIsOpenModal = (modalType) => {
@@ -65,6 +109,12 @@ const Card = (props) => {
     }));
   };
 
+  const reset = () => {
+    get(`${query}&attached=${attached}&sort=type,${codeType}`)
+    .then(data => {
+        setCodeData(data)
+    })
+  };
     return (
         <div className="content">
                 <FormGroup check className="mt-3">
@@ -86,7 +136,7 @@ const Card = (props) => {
                       }}
                 >
                 <FormGroup check inline className="form-check-radio">
-                        <Label check>
+                    <Label check>
                           <Input
                               defaultValue="DESC"
                               id="exampleRadios3"
@@ -113,6 +163,72 @@ const Card = (props) => {
                         </Label>
                   </FormGroup>
                   </Form>
+                    <hr />
+
+                    <div className="filter-content">
+                    <h2>Filter</h2>
+
+                    <section>
+                    <div className="pin-content">
+                            <FormGroup check className="mt-3">
+                                <Input 
+                                    value={filterPin}
+                                    type="number"
+                                    placeholder="Pin"
+                                    onChange={(e) => setFilterPin(e.target.value)}
+                                />
+                            </FormGroup>
+                        </div>
+
+                        <div className="type-content">
+                            <Form 
+                                onChange={(e) => {
+                                    console.log(e.target.value, '07535316')
+                                    setFilterCodeType(e.target.value)
+                                }}
+                            >
+                            <FormGroup check inline className="form-check-radio">
+
+                                <Label check>
+                                    <Input
+                                        defaultValue="1"
+                                        id="exampleRadios3"
+                                        name="1"
+                                        type="radio"
+                                        checked={filterCodeType === '1'}
+                                    />
+                                    <span className="form-check-sign" />
+                                    GOLD
+                                </Label>
+
+                                <Label check>
+                                    <Input
+                                        defaultValue="0"
+                                        id="exampleRadios3"
+                                        name="0"
+                                        type="radio"
+                                        checked={filterCodeType === '0'}
+                                    />
+                                    <span className="form-check-sign" />
+                                    BLACK
+                                </Label>
+                            </FormGroup>
+                            </Form>
+                        </div>
+
+                        <div>
+                            <Button onClick={handleFilter}>
+                                Search
+                            </Button>
+
+                            <Button 
+                                onClick={reset}
+                            >
+                                Reset
+                            </Button>
+                        </div>
+                    </section>
+                    </div>
               <AddModal
                 show={modalShow.addModal}
                 onRefreshPage={() => props.history.push('/')}
@@ -136,7 +252,7 @@ const Card = (props) => {
                                 return (
                                     <tr
                                     style={{ cursor: "pointer" }}
-                                    className="btn-round"
+                                    className="btn-round card-table-row"
                                     onClick={() => {
                                         handleIsOpenModal('addModal')
                                         setPin(card.pin)
