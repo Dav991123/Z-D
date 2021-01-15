@@ -13,7 +13,7 @@ const Card = (props) => {
     const [pin, setPin] = useState('');
     const [attached, setAttached] = useState(false);
     const [filter, setFilter] = useState([]);
-
+    const [month, setMonth] = useState(null);
     const [filterPin, setFilterPin] = useState('');
     const [filterCodeType, setFilterCodeType] = useState(null);;
     
@@ -60,7 +60,7 @@ const Card = (props) => {
 
         ];
 
-        if(filterPin && filterCodeType) {
+        if(filterPin && filterCodeType && model) {
             model = [
                 {
                     "name":"pin",
@@ -70,6 +70,11 @@ const Card = (props) => {
                 {
                     "name":"type",
                     "value": +filterCodeType,
+                    "operation":"EQUALS"
+                },
+                {
+                    "name":"activeMonths",
+                    "value": +month,
                     "operation":"EQUALS"
                 }
             ]
@@ -86,6 +91,14 @@ const Card = (props) => {
                 {
                     "name":"type",
                     "value": +filterCodeType,
+                    "operation":"EQUALS"
+                }
+            ]
+        }else if(month) {
+            model = [
+                {
+                    "name":"activeMonths",
+                    "value": +month,
                     "operation":"EQUALS"
                 }
             ]
@@ -115,6 +128,7 @@ const Card = (props) => {
         setCodeData(data)
     })
   };
+  
     return (
         <div className="content">
                 <FormGroup check className="mt-3">
@@ -178,7 +192,18 @@ const Card = (props) => {
                                     onChange={(e) => setFilterPin(e.target.value)}
                                 />
                             </FormGroup>
-                        </div>
+                    </div>
+
+                    <div className="pin-content">
+                            <FormGroup check className="mt-3">
+                                <Input 
+                                    value={month}
+                                    type="number"
+                                    placeholder="Month"
+                                    onChange={(e) => setMonth(e.target.value)}
+                                />
+                            </FormGroup>
+                    </div>
 
                         <div className="type-content">
                             <Form 
